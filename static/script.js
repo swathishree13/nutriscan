@@ -1,100 +1,96 @@
 const video = document.getElementById("camera");
-
+const loading = document.getElementById("loading");
 if (video) {
 
     navigator.mediaDevices.getUserMedia({
-        video: true
+        video: {
+            facingMode: "environment"
+        }
     })
-
     .then(stream => {
         video.srcObject = stream;
     })
-
     .catch(error => {
-        alert("Camera access denied");
-        console.log(error);
+        alert("Camera access denied or unavailable.");
+        console.error(error);
     });
 }
 
 function capture() {
 
     const canvas = document.getElementById("canvas");
-
     const ctx = canvas.getContext("2d");
 
     canvas.width = video.videoWidth;
-
     canvas.height = video.videoHeight;
 
     ctx.drawImage(video, 0, 0);
 
-    alert("Image Captured Successfully ✅");
+
+    alert("Image captured successfully!");
 }
 
 function analyze() {
 
     const canvas = document.getElementById("canvas");
 
+    loading.classList.remove("hidden");
+
     canvas.toBlob(blob => {
 
         const formData = new FormData();
-
-        formData.append(
-            "image",
-            blob,
-            "scan.png"
-        );
-
-        document.getElementById("output").innerHTML =
-            "<h3>Analyzing...</h3>";
+        formData.append("image", blob, "scan.png");
 
         fetch("/analyze", {
             method: "POST",
             body: formData
         })
-
         .then(response => response.json())
-
         .then(data => {
+
+            loading.classList.add("hidden");
 
             document.getElementById("output").innerHTML = `
 
-            <div class="result-card">
+                <div class="result-card">
 
-                <h2>${data.final_label}</h2>
+                    <h2>${data.final_label}</h2>
 
-                <p><strong>ML Prediction:</strong> ${data.ml_label}</p>
+                    <div class="result-grid">
 
-                <p><strong>Confidence:</strong> ${data.confidence}%</p>
+                        <div class="result-item">
+                            <span>ML Prediction</span>
+                            <strong>${data.ml_label}</strong>
+                        </div>
 
-                <p><strong>Health Score:</strong> ${data.score}</p>
+                        <div class="result-item">
+                            <span>Confidence</span>
+                            <strong>${(data.confidence * 100).toFixed(2)}%</strong>
+                        </div>
 
-                <p><strong>Calories:</strong> ${data.calories}</p>
+                        <div class="result-item">
+                            <span>Health Score</span>
+                            <strong>${data.score}</strong>
+                        </div>
 
-                <h3>Detected Text</h3>
+                        <div class="result-item">
+                            <span>Calories</span>
+                            <strong>${data.calories}</strong>
+                        </div>
 
-                <div class="ocr-box">
-                    ${data.ocr_text}
+                    </div>
+
+                    <ul class="reason-list">
+                        ${data.reasons.map(reason => `<li>${reason}</li>`).join("")}
+                    </ul>
+
                 </div>
-
-                <h3>AI Analysis</h3>
-
-                <ul>
-                    ${data.reasons.map(
-                        reason => `<li>${reason}</li>`
-                    ).join("")}
-                </ul>
-
-            </div>
             `;
         })
-
         .catch(error => {
-
-            console.log(error);
-
-            document.getElementById("output").innerHTML =
-                "<h3>Error analyzing image</h3>";
+            loading.classList.add("hidden");
+            alert("Analysis failed.");
+            console.error(error);
         });
 
     }, "image/png");

@@ -1,47 +1,70 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriScan AI</title>
 
     <link rel="stylesheet" href="/static/style.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<nav>
+<header>
+    <nav class="navbar">
+        <div class="logo">NutriScan AI</div>
 
-    <h1>NutriScan AI</h1>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/scanner">Scanner</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <div>
-        <a href="/">Home</a>
-        <a href="/scanner">Scanner</a>
-        <a href="/about">About</a>
-    </div>
+<section class="hero">
 
-</nav>
+    <div class="hero-left">
+        <span class="tag">AI Powered Nutrition Analyzer</span>
 
-<div class="container">
-
-    <div class="card">
-
-        <h1>NutriScan AI</h1>
+        <h1>
+            Smart Food <br>
+            Health Analysis
+        </h1>
 
         <p>
-            Smart AI Health Analysis for Food Products
+            NutriScan AI uses OCR, Machine Learning, and Nutrition APIs
+            to detect food health quality, calories, and nutritional insights.
         </p>
 
-        <a href="/scanner">
-            <button>
-                Start Scanning
-            </button>
-        </a>
+        <div class="hero-buttons">
+            <a href="/scanner">
+                <button class="primary-btn">Start Scanning</button>
+            </a>
 
+            <a href="/about">
+                <button class="secondary-btn">Learn More</button>
+            </a>
+        </div>
     </div>
 
-</div>
+    <div class="hero-right">
+        <div class="glass-card floating-card">
+            <h2>NutriScan AI</h2>
 
-</body>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3>AI</h3>
+                    <p>OCR Detection</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>ML</h3>
+                    <p>Prediction Engine</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>API</h3>
 </html>
