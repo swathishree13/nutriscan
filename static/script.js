@@ -1,5 +1,6 @@
 const video = document.getElementById("camera");
 const loading = document.getElementById("loading");
+
 if (video) {
 
     navigator.mediaDevices.getUserMedia({
@@ -11,7 +12,7 @@ if (video) {
         video.srcObject = stream;
     })
     .catch(error => {
-        alert("Camera access denied or unavailable.");
+        console.log("Camera not available");
         console.error(error);
     });
 }
@@ -19,13 +20,17 @@ if (video) {
 function capture() {
 
     const canvas = document.getElementById("canvas");
+
+    if (!canvas || !video) {
+        return;
+    }
+
     const ctx = canvas.getContext("2d");
 
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
     ctx.drawImage(video, 0, 0);
-
 
     alert("Image captured successfully!");
 }
@@ -34,7 +39,14 @@ function analyze() {
 
     const canvas = document.getElementById("canvas");
 
-    loading.classList.remove("hidden");
+    if (!canvas) {
+        alert("Canvas not found");
+        return;
+    }
+
+    if (loading) {
+        loading.classList.remove("hidden");
+    }
 
     canvas.toBlob(blob => {
 
@@ -48,7 +60,9 @@ function analyze() {
         .then(response => response.json())
         .then(data => {
 
-            loading.classList.add("hidden");
+            if (loading) {
+                loading.classList.add("hidden");
+            }
 
             document.getElementById("output").innerHTML = `
 
@@ -88,8 +102,12 @@ function analyze() {
             `;
         })
         .catch(error => {
-            loading.classList.add("hidden");
-            alert("Analysis failed.");
+
+            if (loading) {
+                loading.classList.add("hidden");
+            }
+
+            alert("Analysis failed");
             console.error(error);
         });
 
