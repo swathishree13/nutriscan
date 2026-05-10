@@ -1,59 +1,81 @@
+<!DOCTYPE html>
 <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About NutriScan</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-<header>
-    <nav class="navbar">
-        <div class="logo">NutriScan AI</div>
+    <header>
 
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/scanner">Scanner</a></li>
-        </ul>
-    </nav>
-</header>
+        <nav class="navbar">
 
-<section class="about-page">
-
-    <div class="about-card">
-
-        <h1>About NutriScan AI</h1>
-
-        <p>
-            NutriScan AI is an intelligent nutrition analysis system that uses
-            OCR technology, Machine Learning algorithms, and Nutrition APIs
-            to evaluate food products and generate health predictions.
-        </p>
-
-        <div class="features-grid">
-
-            <div class="feature-box">
-                <h3>OCR Scanner</h3>
-                <p>Extracts food label text using advanced OCR technology.</p>
+            <div class="logo">
+                NutriScan AI
             </div>
 
-            <div class="feature-box">
-                <h3>Machine Learning</h3>
-                <p>Predicts food health quality using AI models.</p>
-            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/scanner">Scanner</a></li>
+            </ul>
 
-            <div class="feature-box">
-                <h3>Nutrition API</h3>
-                <p>Fetches calories and nutrition information in real-time.</p>
-            </div>
+        </nav>
 
-            <div class="feature-box">
-                <h3>Explainable AI</h3>
-                <p>Displays reasons and confidence behind predictions.</p>
+    </header>
+
+    <section class="about-page">
+
+        <div class="about-card">
+
+            <h1>About NutriScan AI</h1>
+
+            <p>
+                NutriScan AI is an intelligent nutrition analysis system that uses
+                OCR technology, Machine Learning algorithms, and Nutrition APIs
+                to evaluate food products and generate health predictions.
+            </p>
+
+            <div class="features-grid">
+
+                <div class="feature-box">
+                    <h3>OCR Scanner</h3>
+                    <p>Extracts food label text using advanced OCR technology.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Machine Learning</h3>
+                    <p>Predicts food health quality using AI models.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Nutrition API</h3>
+                    <p>Fetches calories and nutrition information in real-time.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Explainable AI</h3>
+                    <p>Displays reasons and confidence behind predictions.</p>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 </body>
+
 </html>

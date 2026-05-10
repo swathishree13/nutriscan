@@ -1,58 +1,87 @@
 <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scanner</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-<header>
-    <nav class="navbar">
-        <div class="logo">NutriScan AI</div>
+    <header>
 
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-    </nav>
-</header>
+        <nav class="navbar">
 
-<section class="scanner-page">
+            <div class="logo">
+                NutriScan AI
+            </div>
 
-    <div class="scanner-card">
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
 
-        <div class="scanner-header">
-            <h1>Live Food Scanner</h1>
-            <p>Capture food labels and analyze nutritional quality instantly.</p>
+        </nav>
+
+    </header>
+
+    <section class="scanner-page">
+
+        <div class="scanner-card">
+
+            <div class="scanner-header">
+
+                <h1>Live Food Scanner</h1>
+
+                <p>
+                    Capture food labels and analyze nutritional quality instantly.
+                </p>
+
+            </div>
+
+            <div class="camera-wrapper">
+
+                <video id="camera" autoplay playsinline></video>
+
+            </div>
+
+            <div class="scanner-buttons">
+
+                <button class="primary-btn" onclick="capture()">
+                    Capture
+                </button>
+
+                <button class="secondary-btn" onclick="analyze()">
+                    Analyze
+                </button>
+
+            </div>
+
+            <canvas id="canvas" hidden></canvas>
+
+            <div id="loading" class="loading hidden">
+                Analyzing Nutrition Data...
+            </div>
+
+            <div id="output"></div>
+
         </div>
 
-        <div class="camera-wrapper">
-            <video id="camera" autoplay playsinline></video>
-        </div>
+    </section>
 
-        <div class="scanner-buttons">
-            <button class="primary-btn" onclick="capture()">
-                Capture
-            </button>
-
-            <button class="secondary-btn" onclick="analyze()">
-                Analyze
-            </button>
-        </div>
-
-        <canvas id="canvas" hidden></canvas>
-
-        <div id="loading" class="loading hidden">
-            Analyzing Nutrition Data...
-        </div>
-
-        <div id="output"></div>
-
-    </div>
-
-</section>
-
-<script src="/static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
+
 </html>

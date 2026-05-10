@@ -1,70 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>NutriScan AI</title>
 
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-<header>
-    <nav class="navbar">
-        <div class="logo">NutriScan AI</div>
+    <header>
 
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/scanner">Scanner</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-    </nav>
-</header>
+        <nav class="navbar">
 
-<section class="hero">
+            <div class="logo">
+                NutriScan AI
+            </div>
 
-    <div class="hero-left">
-        <span class="tag">AI Powered Nutrition Analyzer</span>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/scanner">Scanner</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
 
-        <h1>
-            Smart Food <br>
-            Health Analysis
-        </h1>
+        </nav>
 
-        <p>
-            NutriScan AI uses OCR, Machine Learning, and Nutrition APIs
-            to detect food health quality, calories, and nutritional insights.
-        </p>
+    </header>
 
-        <div class="hero-buttons">
-            <a href="/scanner">
-                <button class="primary-btn">Start Scanning</button>
-            </a>
+    <section class="hero">
 
-            <a href="/about">
-                <button class="secondary-btn">Learn More</button>
-            </a>
+        <div class="hero-left">
+
+            <span class="tag">
+                AI Powered Nutrition Analyzer
+            </span>
+
+            <h1>
+                Smart Food <br>
+                Health Analysis
+            </h1>
+
+            <p>
+                NutriScan AI uses OCR, Machine Learning, and Nutrition APIs
+                to detect food health quality, calories, and nutritional insights.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/scanner">
+                    <button class="primary-btn">
+                        Start Scanning
+                    </button>
+                </a>
+
+                <a href="/about">
+                    <button class="secondary-btn">
+                        Learn More
+                    </button>
+                </a>
+
+            </div>
+
         </div>
-    </div>
 
-    <div class="hero-right">
-        <div class="glass-card floating-card">
-            <h2>NutriScan AI</h2>
+        <div class="hero-right">
 
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <h3>AI</h3>
-                    <p>OCR Detection</p>
+            <div class="glass-card floating-card">
+
+                <h2>NutriScan AI</h2>
+
+                <div class="stats-grid">
+
+                    <div class="stat-box">
+                        <h3>AI</h3>
+                        <p>OCR Detection</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>ML</h3>
+                        <p>Prediction Engine</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>API</h3>
+                        <p>Nutrition Data</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>DB</h3>
+                        <p>Scan History</p>
+                    </div>
+
                 </div>
 
-                <div class="stat-box">
-                    <h3>ML</h3>
-                    <p>Prediction Engine</p>
-                </div>
+            </div>
 
-                <div class="stat-box">
-                    <h3>API</h3>
+        </div>
+
+    </section>
+
+</body>
+
 </html>
