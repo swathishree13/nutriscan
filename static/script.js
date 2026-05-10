@@ -12,8 +12,8 @@ if (video) {
         video.srcObject = stream;
     })
     .catch(error => {
-        console.log("Camera not available");
-        console.error(error);
+        console.log(error);
+        alert("Camera access denied or unavailable");
     });
 }
 
@@ -32,7 +32,7 @@ function capture() {
 
     ctx.drawImage(video, 0, 0);
 
-    alert("Image captured successfully!");
+    alert("Image Captured Successfully");
 }
 
 function analyze() {
@@ -40,13 +40,10 @@ function analyze() {
     const canvas = document.getElementById("canvas");
 
     if (!canvas) {
-        alert("Canvas not found");
         return;
     }
 
-    if (loading) {
-        loading.classList.remove("hidden");
-    }
+    loading.classList.remove("hidden");
 
     canvas.toBlob(blob => {
 
@@ -60,9 +57,7 @@ function analyze() {
         .then(response => response.json())
         .then(data => {
 
-            if (loading) {
-                loading.classList.add("hidden");
-            }
+            loading.classList.add("hidden");
 
             document.getElementById("output").innerHTML = `
 
@@ -102,13 +97,9 @@ function analyze() {
             `;
         })
         .catch(error => {
-
-            if (loading) {
-                loading.classList.add("hidden");
-            }
-
-            alert("Analysis failed");
-            console.error(error);
+            loading.classList.add("hidden");
+            console.log(error);
+            alert("Analysis Failed");
         });
 
     }, "image/png");
