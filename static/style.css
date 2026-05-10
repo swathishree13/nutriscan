@@ -1,0 +1,137 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI';
+    min-height:100vh;
+    color:white;
+    background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#000000);
+    background-size:400% 400%;
+    animation:bg 10s ease infinite;
+}
+
+@keyframes bg{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    background:rgba(0,0,0,0.3);
+    backdrop-filter:blur(10px);
+}
+
+nav h1{
+    font-size:32px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:18px;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:cyan;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:85vh;
+    padding:30px;
+}
+
+.card{
+    width:450px;
+    padding:40px;
+    text-align:center;
+    border-radius:25px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 40px rgba(0,255,255,0.3);
+}
+
+h1,h2{
+    margin-bottom:20px;
+}
+
+p{
+    margin:10px 0;
+}
+
+button{
+    padding:14px 30px;
+    margin:10px;
+    border:none;
+    border-radius:12px;
+    background:cyan;
+    color:black;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+button:hover{
+    transform:scale(1.08);
+    background:#00bfff;
+}
+
+video{
+    width:100%;
+    border-radius:20px;
+    margin-top:20px;
+    box-shadow:0 0 25px cyan;
+}
+
+.result-card{
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.08);
+    text-align:left;
+}
+
+.result-card h2{
+    text-align:center;
+}
+
+ul{
+    margin-top:10px;
+    padding-left:20px;
+}
+
+li{
+    margin-bottom:8px;
+}
+
+.ocr-box{
+    margin-top:10px;
+    padding:10px;
+    background:black;
+    color:#00ffcc;
+    border-radius:10px;
+    font-size:14px;
+    max-height:120px;
+    overflow:auto;
+}

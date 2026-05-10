@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Scanner</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h1>NutriScan AI</h1>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Live Scanner</h1>
+
+        <video
+            id="camera"
+            autoplay
+            playsinline>
+        </video>
+
+        <canvas id="canvas" hidden></canvas>
+
+        <br>
+
+        <button onclick="capture()">
+            Capture
+        </button>
+
+        <button onclick="analyze()">
+            Analyze
+        </button>
+
+        <div id="output"></div>
+
+    </div>
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
