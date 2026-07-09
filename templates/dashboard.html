@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriScan Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#0f172a;
+    color:white;
+    margin:0;
+}
+
+.dashboard{
+    padding:40px;
+}
+
+.dashboard-title{
+    text-align:center;
+    font-size:50px;
+    margin-bottom:40px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.stat-card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(0,255,255,.2);
+}
+
+.stat-card:hover{
+    transform:translateY(-10px);
+}
+
+.stat-card h2{
+    font-size:20px;
+}
+
+.stat-card h1{
+    font-size:55px;
+    color:#00ffff;
+}
+
+.history-section{
+    margin-top:50px;
+}
+
+.history-section h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.history-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.history-card{
+    background:rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 0 15px rgba(0,255,255,.15);
+}
+
+.history-card h3{
+    color:#00ffff;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="dashboard">
+
+    <h1 class="dashboard-title">
+        NutriScan Dashboard
+    </h1>
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <h2>Total Scans</h2>
+            <h1 id="totalScans">0</h1>
+        </div>
+
+        <div class="stat-card">
+            <h2>Healthy Products</h2>
+            <h1 id="healthyCount">0</h1>
+        </div>
+
+        <div class="stat-card">
+            <h2>Unhealthy Products</h2>
+            <h1 id="unhealthyCount">0</h1>
+        </div>
+
+    </div>
+
+    <div class="history-section">
+
+        <h2>Recent Scan History</h2>
+
+        <div id="scanHistory" class="history-grid">
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadDashboard();
+});
+
+function loadDashboard(){
+
+    fetch("/get_dashboard_data")
+    .then(response => response.json())
+    .then(data => {
+
+        document.getElementById("totalScans").innerText =
+            data.total_scans;
+
+        document.getElementById("healthyCount").innerText =
+            data.healthy_count;
+
+        document.getElementById("unhealthyCount").innerText =
+            data.unhealthy_count;
+
+        const historyDiv =
+            document.getElementById("scanHistory");
+
+        historyDiv.innerHTML = "";
+
+        data.history.forEach(item => {
+
+            historyDiv.innerHTML += `
+                <div class="history-card">
+                    <h3>${item.product}</h3>
+
+                    <p>
+                    <strong>Prediction:</strong>
+                    ${item.prediction}
+                    </p>
+
+                    <p>
+                    <strong>Confidence:</strong>
+                    ${item.confidence}%
+                    </p>
+
+                    <p>
+                    <strong>Calories:</strong>
+                    ${item.calories}
+                    </p>
+
+                </div>
+            `;
+        });
+
+    });
+}
+
+</script>
+
+</body>
+</html>

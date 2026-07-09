@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan History | NutriScan AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        body{
+            background:#0f172a;
+            color:white;
+            font-family:'Poppins',sans-serif;
+            margin:0;
+        }
+
+        .history-container{
+            width:90%;
+            max-width:1200px;
+            margin:40px auto;
+        }
+
+        .history-title{
+            text-align:center;
+            font-size:42px;
+            margin-bottom:35px;
+            color:#38bdf8;
+        }
+
+        .history-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:25px;
+        }
+
+        .history-card{
+            background:rgba(255,255,255,.08);
+            border-radius:20px;
+            padding:22px;
+            box-shadow:0 8px 20px rgba(0,0,0,.3);
+            transition:.3s;
+        }
+
+        .history-card:hover{
+            transform:translateY(-6px);
+        }
+
+        .history-card h3{
+            color:#38bdf8;
+            margin-bottom:15px;
+        }
+
+        .history-card p{
+            margin:8px 0;
+            color:#e2e8f0;
+        }
+
+        .empty{
+            text-align:center;
+            font-size:22px;
+            margin-top:80px;
+            color:#cbd5e1;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        NutriScan AI
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/scanner">Scanner</a></li>
+
+        <li><a href="/dashboard">Dashboard</a></li>
+
+    </ul>
+
+</nav>
+
+<div class="history-container">
+
+    <h1 class="history-title">
+        Scan History
+    </h1>
+
+    <div id="historyGrid" class="history-grid">
+
+    </div>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", loadHistory);
+
+async function loadHistory(){
+
+    const historyGrid =
+        document.getElementById("historyGrid");
+
+    try{
+
+        const response =
+            await fetch("/get_dashboard_data");
+
+        const data =
+            await response.json();
+
+        historyGrid.innerHTML="";
+
+        if(data.history.length===0){
+
+            historyGrid.innerHTML=`
+                <div class="empty">
+                    No scan history available.
+                </div>
+            `;
+
+            return;
+        }
+
+        data.history.forEach(item=>{
+
+            historyGrid.innerHTML+=`
+
+            <div class="history-card">
+
+                <h3>${item.product}</h3>
+
+                <p>
+                    <strong>Prediction:</strong>
+                    ${item.prediction}
+                </p>
+
+                <p>
+                    <strong>Confidence:</strong>
+                    ${item.confidence}%
+                </p>
+
+                <p>
+                    <strong>Calories:</strong>
+                    ${item.calories}
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    ${item.date}
+                </p>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+    catch(err){
+
+        historyGrid.innerHTML=`
+            <div class="empty">
+                Failed to load history.
+            </div>
+        `;
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

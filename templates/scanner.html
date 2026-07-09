@@ -4,84 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner - NutriScan AI</title>
 
-    <title>Scanner</title>
-
-    <link rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <header>
+<header>
+    <nav class="navbar">
+        <div class="logo">NutriScan AI</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+</header>
 
-        <nav class="navbar">
+<section class="scanner-page">
 
-            <div class="logo">
-                NutriScan AI
-            </div>
+    <div class="scanner-card">
 
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-
-        </nav>
-
-    </header>
-
-    <section class="scanner-page">
-
-        <div class="scanner-card">
-
-            <div class="scanner-header">
-
-                <h1>Live Food Scanner</h1>
-
-                <p>
-                    Capture food labels and analyze nutritional quality instantly.
-                </p>
-
-            </div>
-
-            <div class="camera-wrapper">
-
-                <video id="camera" autoplay playsinline></video>
-
-            </div>
-
-            <div class="scanner-buttons">
-
-                <button class="primary-btn" onclick="capture()">
-                    Capture
-                </button>
-
-                <button class="secondary-btn" onclick="analyze()">
-                    Analyze
-                </button>
-
-            </div>
-
-            <canvas id="canvas" hidden></canvas>
-
-            <div id="loading" class="loading hidden">
-                Analyzing Nutrition Data...
-            </div>
-
-            <div id="output"></div>
-
+        <div class="scanner-header">
+            <h1>Live Food Scanner</h1>
+            <p>Capture or upload a food label for AI analysis</p>
         </div>
 
-    </section>
+        <!-- CAMERA -->
+        <div class="camera-wrapper">
+            <video id="camera" autoplay playsinline></video>
+        </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <p id="cameraStatus" class="status-pill">Starting camera...</p>
+
+        <!-- BUTTONS -->
+        <div class="scanner-buttons">
+            <button id="captureBtn" class="primary-btn">📸 Capture</button>
+            <button id="analyzeBtn" class="secondary-btn">🔍 Analyze</button>
+        </div>
+
+        <!-- UPLOAD -->
+        <input type="file" id="imageUpload" accept="image/*">
+
+        <!-- HIDDEN CANVAS -->
+        <canvas id="canvas" hidden></canvas>
+
+        <!-- PREVIEW -->
+        <div class="preview-box">
+            <br><br>
+            <img id="preview" hidden />
+            <p id="emptyPreview">No image selected</p>
+        </div>
+
+        <!-- LOADING -->
+        <div id="loading" class="loading hidden">
+            Analyzing nutrition data...
+        </div>
+
+        <!-- MESSAGE -->
+        <p id="message" class="form-message"></p>
+
+        <!-- RESULT -->
+        <div id="output" class="result-card"></div>
+
+    </div>
+
+</section>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
-
 </html>

@@ -1,8 +1,13 @@
 Flask
+Flask-Login
+Flask-SQLAlchemy
+Flask-Bcrypt
+python-dotenv
 pytesseract
 Pillow
 requests
 scikit-learn
 pandas
 opencv-python-headless
+easyocr
 gunicorn

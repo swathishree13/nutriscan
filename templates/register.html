@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - NutriScan AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">NutriScan AI</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="scanner-page">
+        <div class="scanner-card">
+            <div class="scanner-header">
+                <h1>Create your account</h1>
+                <p>Join NutriScan AI for secure, personalized food intelligence.</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" autocomplete="off">
+                <input type="text" name="full_name" autocomplete="off" placeholder="Full Name" required>
+                <input type="email" name="email" autocomplete="off" placeholder="Email" required>
+                <div class="password-field">
+                    <input type="password" id="password" name="password" autocomplete="new-password" placeholder="Password" required>
+                    <button type="button" class="toggle-password" data-target="password">Show</button>
+                </div>
+                <div id="password-strength" class="password-strength">Strength: Enter a password</div>
+                <div class="password-field">
+                    <input type="password" id="confirm_password" name="confirm_password" autocomplete="new-password" placeholder="Confirm Password" required>
+                    <button type="button" class="toggle-password" data-target="confirm_password">Show</button>
+                </div>
+                <label><input type="checkbox" name="terms" required> I accept the terms and conditions</label>
+                <label><input type="checkbox" name="privacy" required> I accept the privacy policy</label>
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Create Account</button>
+                </div>
+            </form>
+
+            <p style="text-align:center; margin-top:20px;">
+                Already have an account? <a href="/login">Login</a>
+            </p>
+        </div>
+    </section>
+    <script>
+        const passwordInput = document.getElementById('password');
+        const strengthBox = document.getElementById('password-strength');
+
+        if (passwordInput && strengthBox) {
+            passwordInput.addEventListener('input', () => {
+                const value = passwordInput.value;
+                let score = 0;
+                if (value.length >= 8) score += 1;
+                if (/[A-Z]/.test(value)) score += 1;
+                if (/[a-z]/.test(value)) score += 1;
+                if (/\d/.test(value)) score += 1;
+                if (/[^A-Za-z0-9]/.test(value)) score += 1;
+
+                if (score <= 2) {
+                    strengthBox.textContent = 'Strength: Weak';
+                    strengthBox.style.color = '#fda4af';
+                } else if (score <= 4) {
+                    strengthBox.textContent = 'Strength: Strong';
+                    strengthBox.style.color = '#86efac';
+                } else {
+                    strengthBox.textContent = 'Strength: Excellent';
+                    strengthBox.style.color = '#7dd3fc';
+                }
+            });
+        }
+
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', () => {
+                const target = document.getElementById(button.dataset.target);
+                if (target) {
+                    target.type = target.type === 'password' ? 'text' : 'password';
+                    button.textContent = target.type === 'password' ? 'Show' : 'Hide';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | NutriScan AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">NutriScan AI</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/scanner">Scanner</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/profile">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="scanner-page">
+        <div class="scanner-card">
+            <div class="scanner-header">
+                <h1>Profile</h1>
+                <p>Manage your account, preferences, and future AI experiences.</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <input type="text" name="full_name" value="{{ user.full_name }}" placeholder="Full Name" required>
+                <input type="text" name="profile_picture" value="{{ user.profile_picture or '' }}" placeholder="Profile Picture URL">
+                <select name="theme">
+                    <option value="dark" {% if user.theme == 'dark' %}selected{% endif %}>Dark</option>
+                    <option value="light" {% if user.theme == 'light' %}selected{% endif %}>Light</option>
+                </select>
+                <select name="language">
+                    <option value="en" {% if user.language == 'en' %}selected{% endif %}>English</option>
+                    <option value="es" {% if user.language == 'es' %}selected{% endif %}>Spanish</option>
+                </select>
+                <label>
+                    <input type="checkbox" name="notifications_enabled" {% if user.notifications_enabled %}checked{% endif %}> Enable notifications
+                </label>
+                <button type="submit" class="primary-btn">Save Profile</button>
+            </form>
+
+            <form method="POST" style="margin-top: 20px;">
+                <input type="hidden" name="delete_account" value="1">
+                <button type="submit" class="secondary-btn">Delete Account</button>
+            </form>
+
+            <p style="margin-top: 20px; text-align: center;"><a href="/logout">Logout</a></p>
+        </div>
+    </section>
+</body>
+</html>
